@@ -6,6 +6,10 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.point, function (sprite, otherSp
     info.changeScoreBy(-1)
     sprites.destroy(kase)
 })
+sprites.onOverlap(SpriteKind.Player, SpriteKind.pluspoint, function (sprite, otherSprite) {
+    info.changeScoreBy(1)
+    sprites.destroy(cakey, effects.spray, 100)
+})
 let cakey: Sprite = null
 let kase: Sprite = null
 tiles.setCurrentTilemap(tilemap`level1`)
@@ -29,7 +33,7 @@ let mySprite = sprites.create(img`
     `, SpriteKind.Player)
 controller.moveSprite(mySprite)
 scene.cameraFollowSprite(mySprite)
-music.play(music.createSong(hex`0078000408020100001c00010a006400f4016400000400000000000000000000000000050000049c000400080005080c0f141d08000c00040c0f12140c00100006080c0f12141d1000140004050c0f14140018000705080c0f141d2018001c00030c0f141c0020000805080c0f12141d2020002400030c0f14240028000805080c0f141d272a28002c00060c0f12141d242c0030000605080c0f142730003400030c0f14340038000806080c0f1214242738003c00030c0f143c00400007080c0f141d2024`), music.PlaybackMode.LoopingInBackground)
+music.play(music.createSong(hex`0078000408020100001c00010a006400f4016400000400000000000000000000000000050000049f000400080005080c0f141d08000c00040c0f12140c00100006080c0f12141d1000140004050c0f14140018000705080c0f141d2018001c00030c0f141c0020000805080c0f12141d2020002400030c0f14240028000805080c0f141d272a28002c00060c0f12141d242c0030000605080c0f142730003400030c0f14340038000b06080c0f1214191d20242738003c00030c0f143c00400007080c0f141d2024`), music.PlaybackMode.LoopingInBackground)
 info.setScore(0)
 game.onUpdateInterval(2000, function () {
     kase = sprites.create(img`
@@ -71,6 +75,6 @@ game.onUpdateInterval(500, function () {
         . . . . . . b b b b 3 d d d b a 
         . . . . . . . . . . b b b a a . 
         `, SpriteKind.pluspoint)
-    tiles.placeOnRandomTile(mySprite, assets.tile`myTile`)
-    tiles.placeOnRandomTile(mySprite, sprites.builtin.forestTiles0)
+    tiles.placeOnRandomTile(cakey, assets.tile`myTile`)
+    tiles.placeOnRandomTile(cakey, sprites.builtin.forestTiles0)
 })
